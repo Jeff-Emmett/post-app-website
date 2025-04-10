@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - Post-Appitalism</title>
+    <style>
+        :root {
+            --primary-color: #34D399;
+            --secondary-color: #4F46E5;
+            --background-color: #0F172A;
+            --text-color: #E2E8F0;
+            --accent-color: #EC4899;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+        }
+        
+        .logo::before {
+            content: "</>";
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.1;
+            top: -1rem;
+            left: -2rem;
+            transform: rotate(-15deg);
+            color: var(--accent-color);
+        }
+        
+        .tagline {
+            font-size: 1.25rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+        
+        .description {
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .feature {
+            flex: 1 1 250px;
+            padding: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-color);
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .cta {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 2rem;
+        }
+        
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+        }
+        
+        .notify-form {
+            max-width: 400px;
+            margin: 0 auto;
+            display: flex;
+        }
+        
+        .notify-input {
+            flex-grow: 1;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px 0 0 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        
+        .notify-btn {
+            border-radius: 0 50px 50px 0;
+            background-color: var(--primary-color);
+            color: #0F172A;
+            border: none;
+            padding: 0 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .notify-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .footer {
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 20s linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.1;
+            }
+            90% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translate(calc(100vw - 50px), calc(100vh - 50px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .countdown {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            min-width: 80px;
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .countdown-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .easter-egg {
+            position: absolute;
+            font-size: 0.8rem;
+            opacity: 0.1;
+            transition: opacity 0.3s ease;
+            cursor: default;
+        }
+
+        .easter-egg:hover {
+            opacity: 0.8;
+        }
+
+        #easter-egg-1 {
+            bottom: 10px;
+            left: 10px;
+        }
+
+        #easter-egg-2 {
+            top: 10px;
+            right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .features {
+                flex-direction: column;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-icons" id="floating-icons">
+        <!-- Will be populated with JavaScript -->
+    </div>
+
+    <div class="container">
+        <h1 class="logo">post-appitalism.app</h1>
+        <p class="tagline">Breaking free from app dependencies. Together.</p>
+        
+        <p class="description">
+            The revolution won't be monetized. Join us at the dawn of post-appitalism, where apps serve people, not profit margins. Coming soon to a digital collective near you.
+        </p>
+        
+        <div class="countdown">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">--</span>
+                <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">--</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">--</span>
+                <span class="countdown-label">Minutes</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">--</span>
+                <span class="countdown-label">Seconds</span>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <h3 class="feature-title">De-Siloification</h3>
+                <p>No more walled gardens. Your data belongs to you, not venture capitalists or data miners.</p>
+            </div>
+            <div class="feature">
+                <h3 class="feature-title">Liberated APIs</h3>
+                <p>Embracing the radical notion that apps should talk to each other without charging subscription fees.</p>
+            </div>
+            <div class="feature">
+                <h3 class="feature-title">Collective Ownership</h3>
+                <p>Built by the people, for the people. Not another unicorn headed for IPO or acquisition.</p>
+            </div>
+        </div>
+        
+        <form class="notify-form" id="notify-form">
+            <input type="email" class="notify-input" placeholder="Enter your email" required>
+            <button type="submit" class="notify-btn">Notify Me</button>
+        </form>
+        
+        <div class="footer">
+            <p>© 2025 The Post-Appitalism Collective | <a href="#">Terms</a> | <a href="#">Privacy</a></p>
+            <p>No venture capital was harmed in the making of this website.</p>
+        </div>
+    </div>
+
+    <div class="easter-egg" id="easter-egg-1">404: Capitalism not found</div>
+    <div class="easter-egg" id="easter-egg-2">chmod 777 society</div>
+
+    <script>
+        // Populate floating app icons
+        const floatingIcons = document.getElementById('floating-icons');
+        const icons = ['💰', '📱', '🔒', '💎', '🤖', '📊', '💸', '🔗', '📈', '🔥'];
+        const numIcons = 20;
+        
+        for (let i = 0; i < numIcons; i++) {
+            const icon = document.createElement('div');
+            icon.className = 'floating-icon';
+            icon.textContent = icons[Math.floor(Math.random() * icons.length)];
+            
+            // Random position and delay
+            const randomX = Math.random() * 100;
+            const randomY = Math.random() * 100;
+            const randomDelay = Math.random() * 20;
+            const randomDuration = 15 + Math.random() * 15;
+            
+            icon.style.left = `${randomX}vw`;
+            icon.style.top = `${randomY}vh`;
+            icon.style.animationDelay = `${randomDelay}s`;
+            icon.style.animationDuration = `${randomDuration}s`;
+            
+            floatingIcons.appendChild(icon);
+        }
+        
+        // Countdown timer
+        const countdownDate = new Date();
+        countdownDate.setDate(countdownDate.getDate() + 42); // Launch in 42 days (a subtle reference to "Hitchhiker's Guide to the Galaxy")
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").textContent = days;
+            document.getElementById("hours").textContent = hours;
+            document.getElementById("minutes").textContent = minutes;
+            document.getElementById("seconds").textContent = seconds;
+            
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("days").textContent = "00";
+                document.getElementById("hours").textContent = "00";
+                document.getElementById("minutes").textContent = "00";
+                document.getElementById("seconds").textContent = "00";
+            }
+        }
+        
+        updateCountdown(); // Run once immediately
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        
+        // Easter egg interactions
+        document.getElementById('easter-egg-1').addEventListener('click', function() {
+            alert("Congratulations! You've found an easter egg. The invisible hand of the market has high-fived you.");
+        });
+        
+        document.getElementById('easter-egg-2').addEventListener('click', function() {
+            alert("Root access granted to society. Use your powers wisely.");
+        });
+        
+        // Form submission
+        document.getElementById('notify-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = e.target.querySelector('input[type="email"]').value;
+            alert(`Thank you for joining the revolution! ${email} has been added to our non-exploitative, fully GDPR-compliant notification list.`);
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
